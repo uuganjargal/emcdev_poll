@@ -4,6 +4,9 @@ const app = express()
 const port = 5000
 const socket = require("socket.io");
 
+//const moment = require("moment");  
+//moment.locale('mn');
+
 //const cors = require("cors")
 //app.use(cors())
 
@@ -45,3 +48,8 @@ io.on("connection", function (socket) {
     console.log('user disconnected', socket.username, activeUsers.size)
   });
 });
+
+
+// setTimeout(function () {
+//   io.emit("time", moment().format('LTS'))
+// }, 1000)
