@@ -3,7 +3,7 @@ import React, { useState } from "react";
 //import {SocketContext, socket} from 'socket';
 import socketio from "socket.io-client";
 
-const ENDPOINT = "http://localhost";
+const ENDPOINT = "/";
 
 function App() {
   const [socket, setSocket] = useState(undefined);
