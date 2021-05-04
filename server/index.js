@@ -4,12 +4,6 @@ const app = express()
 const port = 5000
 const socket = require("socket.io");
 
-//const moment = require("moment");  
-//moment.locale('mn');
-
-//const cors = require("cors")
-//app.use(cors())
-
 app.get('/', (req, res) => {
   res.send('Hello World 11!')
 })
@@ -39,7 +33,8 @@ io.on("connection", function (socket) {
   });
 
   socket.on("message", function(data) {
-    io.emit("new_message", {'user':socket.username, 'message': data});
+    let key = socket.username+':'+Math.random().toString(36).substring(2);
+    io.emit("new_message", {'username':socket.username, 'text': data, 'key': key});
   });
 
   socket.on("disconnect", () => {
@@ -50,6 +45,9 @@ io.on("connection", function (socket) {
 });
 
 
-// setTimeout(function () {
-//   io.emit("time", moment().format('LTS'))
-// }, 1000)
+setInterval(function(){
+  var d = new Date();
+  var n = d.toUTCString();
+  io.emit('timer',n)
+}
+,1000);
