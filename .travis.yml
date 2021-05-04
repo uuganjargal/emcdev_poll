@@ -1,0 +1,21 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t uuganjargal/emcdev-react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true uuganjargal/emcdev-react-test npm test
+
+after_success:
+  - docker build -t uuganjargal/emcdev-cont-client ./client
+  - docker build -t uuganjargal/emcdev-cont-gateway ./gateway
+  - docker build -t uuganjargal/emcdev-cont-server ./server
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push uuganjargal/emcdev-cont-client
+  - docker push uuganjargal/emcdev-cont-gateway
+  - docker push uuganjargal/emcdev-cont-server

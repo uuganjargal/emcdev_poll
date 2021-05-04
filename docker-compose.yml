@@ -1,18 +1,24 @@
 services:
     server:
-        build: server
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./server
         volumes:
             - /app/node_modules
             - ./server:/app
         ports:
             - 5000:5000
     gateway:
-        build: gateway
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./gateway
         ports:
             - 80:80
 
     client:
-        build: client
+        build:
+            dockerfile: Dockerfile.dev
+            context: ./client
         volumes:
             - /app/node_modules
             - ./client:/app

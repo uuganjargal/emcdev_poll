@@ -4,9 +4,6 @@ const app = express()
 const port = 5000
 const socket = require("socket.io");
 
-const cors = require("cors")
-app.use(cors())
-
 app.get('/', (req, res) => {
   res.send('Hello World 11!')
 })
@@ -15,11 +12,7 @@ const server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-const io = socket(server, {
-  cors: {
-    origin: '*'
-  }
-});
+const io = socket(server);
 
 const activeUsers = new Set()
 

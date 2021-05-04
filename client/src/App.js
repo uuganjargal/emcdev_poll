@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //import {SocketContext, socket} from 'socket';
 import socketio from "socket.io-client";
 
-const ENDPOINT = "http://127.0.0.1:5000";
+const ENDPOINT = "http://127.0.0.1/";
 
 function App() {
   const [socket, setSocket] = useState(undefined);
