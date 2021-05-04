@@ -19,3 +19,16 @@ after_success:
   - docker push uuganjargal/emcdev-cont-client
   - docker push uuganjargal/emcdev-cont-gateway
   - docker push uuganjargal/emcdev-cont-server
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-2'
+  app: 'cont-poll'
+  env: 'Contpoll-env'
+  bucket_name: 'elasticbeanstalk-eu-west-2-261535216111'
+  bucket_path: 'cont-poll'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
