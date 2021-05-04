@@ -3,7 +3,7 @@ import React, { useState } from "react";
 //import {SocketContext, socket} from 'socket';
 import socketio from "socket.io-client";
 
-const ENDPOINT = "/";
+const ENDPOINT = "http://localhost";
 
 function App() {
   const [socket, setSocket] = useState(undefined);
@@ -11,7 +11,7 @@ function App() {
   const [users, setUsers] = useState([])
 
   const handleClick = () => {
-    let s = socketio.connect(ENDPOINT);
+    let s = socketio.connect(ENDPOINT, {'path': '/api/socket.io'});
 
     s.on("new_user", handleNewUser); 
     s.on("users", handleUsers); 
